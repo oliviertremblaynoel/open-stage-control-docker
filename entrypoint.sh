@@ -17,4 +17,4 @@ fi
 
 chown -R 1000:1000 "$TARGET"
 
-gosu 1000:1000 xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24" open-stage-control --disable-gpu --no-gui -s localhost:7777 -l /session/session.json --state /session/session.state
+gosu 1000:1000 xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24" open-stage-control --disable-gpu --no-gui -s 0.0.0.0:7777 -l /session/session.json --state /session/session.state
