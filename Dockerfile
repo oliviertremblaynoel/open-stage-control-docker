@@ -7,7 +7,7 @@ LABEL \
   url="https://hub.docker.com/repository/docker/oliviertremblaynoel/open-stage-control-docker" \
   source="https://github.com/oliviertremblaynoel/open-stage-control-docker"
 
-# Install dependencies and gosu
+  # hadolint ignore=DL3008,DL3015,DL4006,DL3047
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget curl ca-certificates gosu xvfb procps xauth \
  && wget "$(wget -qO- https://api.github.com/repos/jean-emmanuel/open-stage-control/releases/latest \
