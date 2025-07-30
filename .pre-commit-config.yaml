@@ -1,0 +1,62 @@
+# Run manually
+#     pre-commit run --all-files -v
+
+###
+# Upgrade linter versions with command :
+#     pre-commit autoupdate
+
+repos:
+############
+# SECURITY
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.27.2
+    hooks:
+      - id: gitleaks
+        name: "🔒 security · Detect hardcoded secrets"
+############
+# ALL FILES
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: detect-private-key
+      - id: mixed-line-ending
+      - id: check-case-conflict
+      - id: forbid-submodules
+      - id: check-symlinks
+      - id: pretty-format-json
+      - id: requirements-txt-fixer
+      - id: sort-simple-yaml
+      - id: file-contents-sorter
+      - id: check-shebang-scripts-are-executable
+      - id: check-executables-have-shebangs
+############
+# BASH SCRIPTS
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        name: "🐚 shell · Lint shell scripts"
+
+############
+# DOCKERFILES
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.13.1-beta
+    hooks:
+      - id: hadolint-docker
+################################
+# DOCKER COMPOSE YAML MANIFESTS
+  - repo: https://github.com/docker-compose-linter/pre-commit-dclint
+    rev: v3.0.0 # Matches the dclint version, use the sha or tag you want to point at
+    hooks:
+      - id: dclint-docker
+        # Optional: regex override for compose files
+        files: ^((docker-)?compose(\..+)?\.ya?ml)$
+        # Optional: enable autofix on commit
+        args: [--fix]

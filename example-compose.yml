@@ -1,0 +1,24 @@
+# dclint disable service-image-require-explicit-tag
+name: dev
+
+volumes:
+  open-stage-control-session:
+
+services:
+  open-stage-control:
+    # Opt a) Using the pre-build image
+    # image: oliviertremblaynoel/open-stage-control-docker:latest
+    # Opt b) Build locally
+    build: .
+    volumes:
+      -  open-stage-control-session:/session
+    ports:
+      - '0.0.0.0:7777:7777' # OSC output port
+      - '0.0.0.0:8080:8080' # Web interface + osc input port
+    environment:
+     - PUID=1000
+     - PGID=1000
+    cap_add:
+      - SYS_ADMIN
+    # security_opt:
+    #   - seccomp=unconfined
